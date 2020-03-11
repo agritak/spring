@@ -19,5 +19,4 @@ public enum Sorting {
         return comparator;
     }
 
-
 }

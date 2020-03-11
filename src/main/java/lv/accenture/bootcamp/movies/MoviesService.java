@@ -27,10 +27,6 @@ public class MoviesService {
         movies.put(movie.getId(), movie);
     }
 
-//    public Set<Movie> movies() {
-//        return new HashSet<Movie>(movies.values());
-//    }
-
     public Movie create(Movie movie) {
         for (Movie m : movies.values()) {
             if (m.equals(movie)) {
@@ -52,7 +48,6 @@ public class MoviesService {
             movies.replace(id, movies.get(id), m);
         }
     }
-
 
     public void delete(String id) {
         movies.remove(id);
