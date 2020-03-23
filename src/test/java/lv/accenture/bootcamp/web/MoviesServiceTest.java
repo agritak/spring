@@ -78,4 +78,5 @@ public class MoviesServiceTest {
         assertNotNull(created.getId());
         verify(movieRepository).save(movie);
     }
+
 }
