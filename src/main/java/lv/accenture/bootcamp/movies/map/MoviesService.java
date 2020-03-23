@@ -1,21 +1,17 @@
-package lv.accenture.bootcamp.movies;
+package lv.accenture.bootcamp.movies.map;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import lv.accenture.bootcamp.movies.respository.Movie;
+import lv.accenture.bootcamp.movies.respository.Sorting;
 
-import javax.annotation.PostConstruct;
-import java.sql.SQLOutput;
 import java.util.*;
 
 import static java.util.Arrays.asList;
 
-@Service
 public class MoviesService {
 
     private Map<String, Movie> movies = new HashMap<>();
 
-    @PostConstruct
+    //@PostConstruct
     public void onStartup() {
         Movie movie = new Movie();
         movie.setId(UUID.randomUUID().toString());
@@ -27,16 +23,22 @@ public class MoviesService {
         movies.put(movie.getId(), movie);
     }
 
+
+    public List<Movie> movies() {
+        return new ArrayList<Movie>(movies.values());
+    }
+
+
     public Movie create(Movie movie) {
         for (Movie m : movies.values()) {
             if (m.equals(movie)) {
                 return null;
             }
         }
-        movie.setId(UUID.randomUUID().toString());
         movies.put(movie.getId(), movie);
         return movie;
     }
+
 
     public void update(String id, Movie movie) {
         if (movies.containsKey(id)) {
@@ -66,21 +68,15 @@ public class MoviesService {
                 found.put(movie.getId(), movie);
             }
         }
-
-//        movies.values().forEach(m -> {
-//            if (m.getName().toLowerCase().contains(keyword.toLowerCase()))
-//                found.put(m.getId(), m);
-//        });
-
-        for (Movie movie : movies.values()) {
-            for (String cast : movie.getCast()) {
-                if (cast.toLowerCase().contains(keyword.toLowerCase())) {
-                    found.put(movie.getId(), movie);
-                }
-            }
-        }
-
         return found;
+
+//        for (Movie movie : movies.values()) {
+//            for (String cast : movie.getCast()) {
+//                if (cast.toLowerCase().contains(keyword.toLowerCase())) {
+//                    found.put(movie.getId(), movie);
+//                }
+//            }
+//        }
     }
 
 }
