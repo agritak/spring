@@ -1,4 +1,4 @@
-package lv.accenture.bootcamp.movies;
+package lv.accenture.bootcamp.movies.respository;
 
 import java.util.Comparator;
 
