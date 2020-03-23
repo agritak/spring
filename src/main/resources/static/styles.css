@@ -1,0 +1,13 @@
+span.validationError {
+	color: red;
+}
+
+p.textBlock {
+    width:640px;
+    text-align: justify;
+}
+
+ul {
+    padding:0;
+}
+
