@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Add User</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+          crossorigin="anonymous">
+    <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
+</head>
+<body>
+<div class="content">
+    <h2 class="pad-big">ADD A NEW MOVIE</h2>
+    <div class="col-md-8 col-md-offset-2">
+        <form action="#" th:action="@{/addmovie}" th:object="${movie}" method="post">
+            <div class="validationError"
+                 th:if="${#fields.hasErrors()}">
+                Please correct the problems below and resubmit.
+            </div>
+            <div class="pad-small">
+                <label for="name" class="col-form-label">Title</label>
+                <input type="text" th:field="*{name}" class="form-control" id="name"
+                       placeholder="Title">
+                <div class="validationError" th:if="${#fields.hasErrors('name')}"
+                     th:errors="*{name}">Name Error
+                </div>
+            </div>
+            <div class="pad-small">
+                <label for="description" class="col-form-label">Description</label>
+                <textarea type="text" th:field="*{description}" class="form-control" id="description"
+                          placeholder="Description"></textarea>
+                <div class="validationError" th:if="${#fields.hasErrors('description')}"
+                     th:errors="*{description}">Description Error
+                </div>
+            </div>
+            <div class="pad-small">
+                <label for="rating" class="col-form-label">Rating</label>
+                <br/>
+                <th:block th:each="i: ${#numbers.sequence(1, 10)}">
+                    <input name="radio-group" type="radio" th:field="*{rating}"
+                           th:value="${i}" id="rating">
+                    <label for="rating" th:text="${i}"></label>
+                </th:block>
+                <div class="validationError" th:if="${#fields.hasErrors('rating')}"
+                     th:errors="*{rating}">Description Error
+                </div>
+            </div>
+            <div class="pad-small">
+                <label for="link" class="col-form-label">Link</label>
+                <input type="text" th:field="*{link}" class="form-control" id="link"
+                       placeholder="Link to IMDb">
+            </div>
+            <div class="pad-big">
+                <input type="submit" class="btn btn-primary" value="Add Movie">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

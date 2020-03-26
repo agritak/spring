@@ -1,4 +1,6 @@
-package lv.accenture.bootcamp.movies.web;
+package lv.accenture.bootcamp.movies.thymeleaf;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,10 +13,12 @@ import java.util.Objects;
 public class Movie {
 
     @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     @NotNull
-    @Size(min = 1, message = "The title is necessary.")
-    @Column(name = "title", nullable = false)
+    @Size(min = 1, message = "Title is necessary.")
+    @Column(name = "title")
     private String name;
     @NotNull(message = "Rating is necessary.")
     private Short rating;

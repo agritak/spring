@@ -1,5 +1,8 @@
-span.validationError {
-	color: red;
+.content {
+  max-width: 640px;
+  margin: auto;
+  text-align: center;
+  font-family: calibri;
 }
 
 p.textBlock {
@@ -8,6 +11,23 @@ p.textBlock {
 }
 
 ul {
-    padding:0;
+    padding: 0;
 }
+
+div.validationError {
+	color: steelblue;
+	text-align: center;
+}
+
+.pad-small {
+     padding: 10px 0;
+}
+
+.pad-big {
+    padding: 25px 0;
+}
+
+
+
+
 

@@ -1,5 +1,9 @@
 package lv.accenture.bootcamp.movies.respository;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+
+import javax.persistence.Column;
 import java.util.List;
 import java.util.Objects;
 
@@ -7,14 +11,14 @@ import java.util.Objects;
 //@Table(name = "movies")
 public class Movie {
 
-    //@Id
+    @Id
     private String id;
-    //@Column(name = "title", nullable = false)
+    @Column(name = "title", nullable = false)
     private String name;
     private Float rating;
-    //@Column(name = "plot")
+    @Column(name = "plot")
     private String description;
-    //@Transient
+    @Transient
     private List<String> cast;
 
     public String getId() {
