@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Movies</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+          crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
+</head>
+<body>
+<div class="content">
+    <h1>MY MOVIES</h1>
+    <h2>WHAT IS THIS PAGE ALL ABOUT?</h2>
+    <p class="textBlock">
+        This page is an outer memory storage of movies I have seen and remember as being
+        quite nice. There you can find genres of movies that I watch most often, my
+        <a href="#fav">favourite</a> movie (kind of - to name something as favorite is an
+        extremely tough choice to make). And a <a href="#list">list</a> of movies I have
+        seen and wouldn't mind to watch again. New movies can be added to the list, too.
+    </p>
+    <h3>POPULAR GENRES</h3>
+    <ul>
+        <li>Sci-Fi</li>
+        <li>Adventure</li>
+        <li>Comedy</li>
+        <li>Fantasy</li>
+        <li>Mystery</li>
+        <li>Drama</li>
+    </ul>
+    <h2 id="fav">MY FAVORITE MOVIE</h2>
+    <h3>INCEPTION</h3>
+    <p class="textBlock">
+        A thief who steals corporate secrets through the use of dream-sharing technology
+        is given the inverse task of planting an idea into the mind of a C.E.O.
+    </p>
+    <a href="https://www.imdb.com/title/tt1375666/?ref_=fn_al_tt_1">
+        <img height="401"
+             src="https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SY1000_CR0,0,675,1000_AL_.jpg"
+             width="271">
+    </a>
+    <h2 id="list">LIST OF MOVIES</h2>
+    <div th:switch="${movies}">
+        <h2 th:case="null">NO MOVIES YET!</h2>
+        <div th:case="*">
+            <table class="table table-hover table-striped table-responsive">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Link</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="movie : ${movies}">
+                    <td th:text="${movie.name}"></td>
+                    <td align="justify" th:text="${movie.description}"></td>
+                    <td>
+                        <div th:if="${!(''.equals(movie.link))}">
+                            <a th:href="${movie.link}">IMDb</a>
+                        </div>
+                    </td>
+                    <td>
+                        <a th:href="@{/edit/{id}(id=${movie.id})}" class="btn btn-primary">
+                            <i class="fas fa-pencil-alt ml-2"></i>
+                        </a>
+                    </td>
+                    <td><a th:href="@{/delete/{id}(id=${movie.id})}" class="btn btn-primary">
+                        <i class="fas fa-times ml-2"></i></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <p>
+                <a href="/form" class="btn btn-primary" value="Add Movie">
+                    Add movie
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
